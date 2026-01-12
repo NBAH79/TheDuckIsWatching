@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TheDuckIsWatching.MainPage">
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsEnabled="False" IsVisible="False" />
+    </Shell.BackButtonBehavior>
+    <ContentPage.ToolbarItems >
+        <ToolbarItem x:Name="Help"
+                     Text="Справка" 
+                     IconImageSource="info_button.svg" 
+                     Order="Secondary"
+                     Clicked="info_Clicked" />
+        <ToolbarItem x:Name="Clear"
+                     Text="Сброс ПИН-кода" 
+                     Order="Secondary" 
+                     Clicked="OnClearClicked" />
+    </ContentPage.ToolbarItems>
+    <Grid>
+        
+        <VerticalStackLayout x:Name="Body_" Padding="50" Spacing="25" IsVisible="true">
+            <Image
+                Source="duckpng.png"
+                HeightRequest="185"
+                Aspect="AspectFit"
+                SemanticProperties.Description="То, о чем вы думаете..." />
+
+            <Label 
+            Text="Пожалуйста, введите ПИН-код доступа"
+            VerticalOptions="Center" 
+            HorizontalOptions="Start" 
+            FontSize="16"
+            FontAttributes="Bold"
+            Margin="0,25,0,0"
+            />
+
+            <Entry 
+                x:Name="PinEntry"
+                Placeholder = "ПИН-код"
+                FontFamily="Helvetica"
+                FontSize="22"
+                MaxLength ="8"
+                IsPassword="True"
+                Keyboard="Numeric"
+                TextChanged="OnPinChanged"/>
+            <Button
+                IsEnabled="false"
+                x:Name="Continue"
+                Text="Continue" 
+                SemanticProperties.Hint="Продолжить"
+                Clicked="OnContinueClicked"
+                HorizontalOptions="Fill" />
+            <!--<Button
+                Style="{StaticResource Strong}"
+                x:Name="Clear"
+                Text="Clear pin" 
+                SemanticProperties.Hint="Сброс ПИН-кода"
+                Clicked="OnClearClicked"
+                HorizontalOptions="Fill"
+                Margin="0,25,0,0" />-->
+        </VerticalStackLayout>
+        <ActivityIndicator Style="{StaticResource ActivityIndicator}"
+            x:Name="Spinner_"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            />
+    </Grid>
+</ContentPage>

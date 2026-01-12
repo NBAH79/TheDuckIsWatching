@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TheDuckIsWatching.SetPinPage"
+             >
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Справка" 
+             IconImageSource="help_button.svg" 
+             Clicked="help_Clicked" 
+             Priority="0" />
+    </ContentPage.ToolbarItems>
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsEnabled="False" IsVisible="False" />
+    </Shell.BackButtonBehavior>
+    <VerticalStackLayout Padding="50" Spacing="25">
+
+        <Label 
+            Text="ПИН-код необходим для аутентификации. При смене или сбросе пин-кода все данные удаляются. Изменяются так же ключи шифрования."
+            VerticalOptions="Center" 
+            HorizontalOptions="Start" 
+            FontSize="14"
+            FontAttributes="None"
+            />
+
+        <Entry x:Name="PinEntry" Placeholder = "Новый ПИН-код" FontFamily="Helvetica" FontSize="22" MaxLength ="6" IsPassword="True" Keyboard="Numeric" Margin="0,25,0,0"/>
+        <Button
+            x:Name="Continue"
+            Text="Continue" 
+            SemanticProperties.Hint="Continues"
+            Clicked="OnContinueClicked"
+            HorizontalOptions="Fill" />
+    </VerticalStackLayout>
+</ContentPage>

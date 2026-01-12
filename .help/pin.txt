@@ -1,0 +1,58 @@
+<VerticalStackLayout Padding="20">
+    <Label Text="Введите ваш PIN-код" FontSize="Title" HorizontalOptions="Center" />
+    <Entry x:Name="PinEntry"
+           Placeholder="PIN-код"
+           IsPassword="True"  <!-- Скрывает вводимые символы -->
+           Keyboard="Numeric" <!-- Только цифровая клавиатура -->
+           MaxLength="4"      <!-- Ограничение на 4 цифры, например -->
+           Margin="0, 20, 0, 0" />
+    <Button Text="Войти"
+            Clicked="OnLoginClicked"
+            Margin="0, 20, 0, 0" />
+</VerticalStackLayout>
+
+
+public partial class LoginPage : ContentPage
+{
+    // Предполагаем, что у вас есть сохраненный PIN-код (в реальном приложении храните его безопасно, например, SecureStorage)
+    private const string CorrectPin = "1234";
+
+    public LoginPage()
+    {
+        InitializeComponent();
+    }
+
+    private async void OnLoginClicked(object sender, EventArgs e)
+    {
+        // 1. Скрыть клавиатуру (по желанию)
+        await HideSoftInputAsync(); // Метод расширения из SoftInputExtensions
+
+        // 2. Проверить введенный PIN-код
+        if (PinEntry.Text == CorrectPin)
+        {
+            // Успешный вход - переход на главную страницу
+            await DisplayAlert("Успех", "Вы вошли в систему!", "ОК");
+            // await Navigation.PushAsync(new MainPage()); // Переход к следующей странице
+        }
+        else
+        {
+            // Неверный PIN-код
+            await DisplayAlert("Ошибка", "Неверный PIN-код. Попробуйте еще раз.", "OK");
+            PinEntry.Text = string.Empty; // Очистить поле
+        }
+    }
+
+    // Метод для скрытия клавиатуры, используя расширение (пример, см. документацию .NET MAUI [2])
+    // Этот метод может быть реализован через SoftInputExtensions, если он не доступен в вашем шаблоне
+    private async Task HideSoftInputAsync()
+    {
+        // Проверка наличия и скрытие клавиатуры, если это необходимо
+        // Например:
+        // if (Microsoft.Maui.Controls.PlatformConfiguration.Windows.Input.IsSoftInputShowing(this))
+        // {
+        //     await Microsoft.Maui.Controls.PlatformConfiguration.Windows.Input.HideSoftInputAsync(this);
+        // }
+        // Или использовать кроссплатформенный подход:
+        await Microsoft.Maui.Controls.Platform.Controls.SoftInputExtensions.HideSoftInputAsync(PinEntry);
+    }
+}

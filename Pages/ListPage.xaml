@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<base:SafePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:base="clr-namespace:TheDuckIsWatching.Utils" 
+             xmlns:converters="clr-namespace:TheDuckIsWatching.Utils"
+             x:Class="TheDuckIsWatching.ListPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Справка" 
+                     Order="Secondary"
+                     IconImageSource="help_button"
+                     Clicked="OnHelpClicked" />
+        <ToolbarItem x:Name="export"
+                     Text="Экспорт ZIP" 
+                     Order="Secondary"
+                     IconImageSource="export_button"
+                     Clicked="OnExportClicked" />
+        <ToolbarItem Text="Импорт ZIP" 
+                     Order="Secondary"
+                     IconImageSource="import_button"
+                     Clicked="OnImportClicked" />
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Resources>
+        <converters:IndexToGradientConverter x:Key="IdxToGradient" />
+    </ContentPage.Resources>
+    
+    <Grid RowDefinitions="*, Auto">
+
+        <!-- список, он прогрессивно подгружаться может -->
+        <CollectionView x:Name="listView"
+                        IsVisible="false"
+                        Grid.Row="0"
+                        SelectionMode="Single"
+                        RemainingItemsThreshold="5" 
+                        VerticalScrollBarVisibility="Always"
+                        VerticalOptions="Fill"
+                        SelectionChanged="OnSelectionChanged"
+                        RemainingItemsThresholdReached="OnLoadMoreItems">
+
+            <!-- если список пуст -->
+            <CollectionView.EmptyView>
+                <Label Style="{StaticResource Empty}" Text="Нет записей" />
+            </CollectionView.EmptyView>
+
+            <!-- шаблон элемента -->
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <!-- две колонки: звездочка в колонке с размером Auto -->
+                    <Grid RowDefinitions="Auto, 1" ColumnDefinitions="*, Auto">
+
+                        <!-- текст -->
+                        <Label Grid.Row="0" 
+                           Grid.Column="0"
+                           Text="{Binding Title}"
+                           Background="{Binding Color, Converter={StaticResource IdxToGradient}}"
+                           Style="{StaticResource Template}"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Start"
+                           HorizontalTextAlignment="Start"/>  
+
+                        <!-- звездочка справа -->
+                        <ImageButton Grid.Row="0"
+                             Grid.Column="1"
+                             WidthRequest="44" 
+                             HeightRequest="44"
+                             Padding="10"
+                             Margin="5,0"
+                             VerticalOptions="Center"
+                             BackgroundColor="Transparent"
+                             Clicked="OnStarClicked"
+                             CommandParameter="{Binding .}">
+                            <!-- иконка по умолчанию (когда IsImportant = False) -->
+                            <ImageButton.Source>
+                                <FileImageSource File="star_gray.svg" />
+                            </ImageButton.Source>
+
+                            <ImageButton.Triggers>
+                                <!-- привязка для смены на золотую -->
+                                <DataTrigger TargetType="ImageButton" 
+                                    Binding="{Binding IsImportant}" 
+                                    Value="True">
+                                    <Setter Property="Source" Value="star_gold.svg" />
+                                </DataTrigger>
+                            </ImageButton.Triggers>
+                        </ImageButton>
+
+                        <!-- разделитель на обе колонки -->
+                        <BoxView Grid.Row="1" 
+                             Grid.Column="0" 
+                             Grid.ColumnSpan="2"
+                             HeightRequest="1" 
+                             Color="LightGray"
+                             Margin="5,0" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        
+        <ActivityIndicator x:Name="loadingIndicator"
+                       IsRunning="True"
+                       IsVisible="True"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       Color="{StaticResource Primary}" />
+
+        <!-- кнопка добавить -->
+        <Button x:Name="addButton"
+                Grid.Row="1"
+                Text="Добавить карточку"
+                Style="{StaticResource Button}"
+                Margin="25"
+                VerticalOptions="End"
+                Clicked="OnAddButtonClicked" />
+
+    </Grid>
+</base:SafePage>

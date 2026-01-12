@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:app="clr-namespace:Microsoft.Maui.ApplicationModel;assembly=Microsoft.Maui.Essentials"
+             x:Class="TheDuckIsWatching.AboutPage"
+             Title="Справка">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Лицензия" 
+                     IconImageSource="license_button.svg" 
+                     Clicked="license_Clicked" 
+                     Priority="0" />
+    </ContentPage.ToolbarItems>
+    <Grid>
+        <ScrollView VerticalScrollBarVisibility="Always">
+            <VerticalStackLayout VerticalOptions="Start" Padding="20,20,50,20" Spacing="15">
+
+                <Label 
+                Text="Защищенный блокнот для хранения личной информации."
+                VerticalOptions="Start" 
+                HorizontalOptions="Center" 
+                FontSize="18"
+                FontAttributes="Bold"
+                Padding="0,10"
+            />
+
+                <Label 
+                Text="Храните пароли, номера телефонов, коды доступа и другую конфиденциальную информацию надёжно."
+                VerticalOptions="Start"  
+                HorizontalOptions="Start" 
+                FontSize="14"
+                FontAttributes="None"
+                Padding="0,10"
+            />
+                <Label 
+                Text="Принцип работы в программе"
+                VerticalOptions="Start" 
+                HorizontalOptions="Center" 
+                FontSize="18"
+                FontAttributes="Bold"
+                Padding="0,10"
+            />
+
+                <Label 
+                Text="Программа представляет собой защищённый набор карточек с произвольным текстовым содержимым."
+                VerticalOptions="Start" 
+                HorizontalOptions="Start" 
+                FontSize="14"
+                FontAttributes="None"
+                Padding="0,10"
+            />
+                <StackLayout>
+                    <Label 
+                        Text="• Приложение не требует специальных разрешений."
+                        VerticalOptions="Start" 
+                        HorizontalOptions="Start" 
+                        FontSize="14"
+                        FontAttributes="None"
+                    />
+                    <Label 
+                        Text="• Приложение не использует пакет CommunityToolkit."
+                        VerticalOptions="Start" 
+                        HorizontalOptions="Start" 
+                        FontSize="14"
+                        FontAttributes="None"
+                    />
+                    <Label 
+                        Text="• Вся информация хранится в зашифрованной базе данных SQLite."
+                        VerticalOptions="Start" 
+                        HorizontalOptions="Start" 
+                        FontSize="14"
+                        FontAttributes="None"
+                    />
+                    <Label 
+                        Text="• Приложение автоматически блокируется после определённого времени бездействия."
+                        VerticalOptions="Start" 
+                        HorizontalOptions="Start" 
+                        FontSize="14"
+                        FontAttributes="None"
+                    />
+                    <Label 
+                        Text="• ПИН-код необходим для защиты от несанкционированного доступа и нигде не сохраняется."
+                        VerticalOptions="Start" 
+                        HorizontalOptions="Start" 
+                        FontSize="14"
+                        FontAttributes="None"
+                    />
+                    <Label 
+                        Text="• Доступно резервное копирование в ZIP-файл с шифрованием AES256."
+                        VerticalOptions="Start" 
+                        HorizontalOptions="Start" 
+                        FontSize="14"
+                        FontAttributes="None"
+
+                    />
+                    <Label 
+                        Text="• Запрещены скриншоты."
+                        VerticalOptions="Start" 
+                        HorizontalOptions="Start" 
+                        FontSize="14"
+                        FontAttributes="None"
+                    />          
+                </StackLayout>
+                <Label 
+                Text="Часто задаваемые вопросы"
+                VerticalOptions="Start" 
+                HorizontalOptions="Center" 
+                FontSize="18"
+                FontAttributes="Bold"
+                Padding="0,10"
+            />
+                <StackLayout>
+                    <Label 
+                    Text="• Что если я не вижу ни одной утки?"
+                    VerticalOptions="Start" 
+                    HorizontalOptions="Start" 
+                    FontSize="14"
+                    FontAttributes="Italic"
+                    Padding="10,10,0,0"
+                />
+
+                    <Label 
+                    Text="Это не значит что их нет!"
+                    VerticalOptions="Start" 
+                    HorizontalOptions="Start" 
+                    FontSize="14"
+                    FontAttributes="None"
+                    Padding="0,0,0,10"
+                />
+
+                    <Label 
+                    Text="• Если меня признали параноиком?"
+                    VerticalOptions="Start" 
+                    HorizontalOptions="Start" 
+                    FontSize="14"
+                    FontAttributes="Italic"
+                    Padding="10,10,0,0"
+                />
+                    <Label 
+                    Text="Это не значит что утка за вами не следит!"
+                    VerticalOptions="Start" 
+                    HorizontalOptions="Start" 
+                    FontSize="14"
+                    FontAttributes="None"
+                    Padding="0,0,0,10"
+                />
+
+                    <Label 
+                     Text="• Я забыл пин-код. Что будет при сбросе?"
+                     VerticalOptions="Start" 
+                     HorizontalOptions="Start" 
+                     FontSize="14"
+                     FontAttributes="Italic"
+                     Padding="10,10,0,0"
+                />
+                    <Label 
+                    Text="При сбросе ПИН-кода все карточки будут безвозвратно удалены. Будьте внимательны при выборе ПИН-кода."
+                    VerticalOptions="Start" 
+                    HorizontalOptions="Start" 
+                    FontSize="14"
+                    FontAttributes="None"
+                    Padding="0,0,0,10"
+                />
+
+                    <Label 
+                     Text="• Что если я не имею пароля на телефоне и в трезвом здравии и ясном уме потерял его?"
+                     VerticalOptions="Start" 
+                     HorizontalOptions="Start" 
+                     FontSize="14"
+                     FontAttributes="Italic"
+                     Padding="10,10,0,0"
+                />
+                    <Label 
+                    Text="У вас будет время, чтобы сменить пароли. При вводе неверного ПИН-кода программа делает паузу на 5 секунд."
+                    VerticalOptions="Start" 
+                    HorizontalOptions="Start" 
+                    FontSize="14"
+                    FontAttributes="None"
+                    Padding="0,0,0,10"
+                />
+
+                    <Label 
+                    Text="• Что если я забыл телефон в вольере с утками с открытой карточкой?"
+                    VerticalOptions="Start" 
+                    HorizontalOptions="Start" 
+                    FontSize="14"
+                    FontAttributes="Italic"
+                    Padding="10,10,0,0"
+                />
+                    <Label 
+                    Text="По истечении времени таймера приложение автоматически вернётся к экрану ввода ПИН-кода."
+                    VerticalOptions="Start" 
+                    HorizontalOptions="Start" 
+                    FontSize="14"
+                    FontAttributes="None"
+                    Padding="0,0,0,10"
+                />
+
+                    <Label 
+                    Text="• Текст на карточке слишком мелкий. Как увеличить?"
+                    VerticalOptions="Start" 
+                    HorizontalOptions="Start" 
+                    FontSize="14"
+                    FontAttributes="Italic"
+                    Padding="10,10,0,0"
+                />
+                    <Label 
+                    Text="Поднесите устройство ближе к глазам. Так сделано специально, чтобы утки не смогли прочесть."
+                    VerticalOptions="Start" 
+                    HorizontalOptions="Start" 
+                    FontSize="14"
+                    FontAttributes="None"
+                    Padding="0,0,0,10"
+                />
+
+                    <Label 
+                    Text="• Таймер заканчивается и я не успеваю ничего сделать."
+                    VerticalOptions="Start" 
+                    HorizontalOptions="Start" 
+                    FontSize="14"
+                    FontAttributes="Italic"
+                    Padding="10,10,0,0"
+                />
+                    <Label 
+                    Text="Нажмите на счётчик времени в верхней части экрана, чтобы сбросить таймер."
+                    VerticalOptions="Start" 
+                    HorizontalOptions="Start" 
+                    FontSize="14"
+                    FontAttributes="None"
+                    Padding="0,0,0,10"
+                />
+
+                    <Label 
+                    Text="• Можно ли увеличить время таймера?"
+                    VerticalOptions="Start" 
+                    HorizontalOptions="Start" 
+                    FontSize="14"
+                    FontAttributes="Italic"
+                    Padding="10,10,0,0"
+                />
+                    <Label 
+                    Text="Нет. Утки очень любят длинные интервалы."
+                    VerticalOptions="Start" 
+                    HorizontalOptions="Start" 
+                    FontSize="14"
+                    FontAttributes="None"
+                    Padding="0,0,0,10"
+                />
+                    <Label 
+                    Text="• Боюсь потерять данные. Как создать резервную копию?"
+                    VerticalOptions="Start" 
+                    HorizontalOptions="Start" 
+                    FontSize="14"
+                    FontAttributes="Italic"
+                    Padding="10,10,0,0"
+                />
+                    <Label 
+                    Text="На странице списка карточек в меню тулбара доступны функции экспорта и импорта через ZIP-файл."
+                    VerticalOptions="Start" 
+                    HorizontalOptions="Start" 
+                    FontSize="14"
+                    FontAttributes="None"
+                    Padding="0,0,0,10"
+                />
+                    <Label 
+                    Text="• Почему так безоблачно?"
+                    VerticalOptions="Start" 
+                    HorizontalOptions="Start" 
+                    FontSize="14"
+                    FontAttributes="Italic"
+                    Padding="10,10,0,0"
+                />
+                    <Label 
+                    Text="Облака — место обитания множества видов уток. Однако экспорт в ZIP позволяет отправить файл, а не просто сохранить."
+                    VerticalOptions="Start" 
+                    HorizontalOptions="Start" 
+                    FontSize="14"
+                    FontAttributes="None"
+                    Padding="0,0,0,10"
+                />
+
+                    <Label 
+                    Text="• Есть ли автозаполнение данных?"
+                    VerticalOptions="Start" 
+                    HorizontalOptions="Start" 
+                    FontSize="14"
+                    FontAttributes="Italic"
+                    Padding="10,10,0,0"
+                />
+                    <Label 
+                    Text="Нет. Это не плагин для браузера, а защищённое хранилище. Программа предназначена для хранения неструктурированной информации."
+                    VerticalOptions="Start" 
+                    HorizontalOptions="Start" 
+                    FontSize="14"
+                    FontAttributes="None"
+                    Padding="0,0,0,10"
+                />
+
+                    <Label 
+                    Text="• Я стёр ZIP-файл с резервной копией с флешки и подарил флешку утке."
+                    VerticalOptions="Start" 
+                    HorizontalOptions="Start" 
+                    FontSize="14"
+                    FontAttributes="Italic"
+                    Padding="10,10,0,0"
+                />
+                    <Label 
+                    Text="Простое удаление файла не гарантирует полного уничтожения данных. Используйте утилиты для безопасного стирания (например, перезапись нулями), чтобы избежать восстановления."
+                    VerticalOptions="Start" 
+                    HorizontalOptions="Start" 
+                    FontSize="14"
+                    FontAttributes="None"
+                    Padding="0,0,0,10"
+                />
+                </StackLayout>
+                <Label 
+                Text="Версия"
+                VerticalOptions="Start" 
+                HorizontalOptions="Center" 
+                FontSize="18"
+                FontAttributes="Bold"
+                Padding="20,0,10,0"
+            />
+
+                <Label 
+                VerticalOptions="Start"  
+                HorizontalOptions="Start" 
+                FontSize="14"
+                FontAttributes="None"
+                >
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{x:Static app:AppInfo.VersionString}" />
+                            <Span Text=" 2026г. Android 15" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label 
+                Text="Автор: Павловский И.С."
+                VerticalOptions="Start"  
+                HorizontalOptions="Start" 
+                FontSize="14"
+                FontAttributes="None"
+            />
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

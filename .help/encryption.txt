@@ -1,0 +1,96 @@
+using System.IO;
+using System.Security.Cryptography;
+using System.Text;
+
+public static class CustomEncryption
+{
+    // Key and IV must be kept secret and managed securely
+    // In a real app, do not hardcode these values.
+    private static readonly byte[] Key = Encoding.UTFUTF8.GetBytes("a_very_strong_32_byte_key_for_aes");
+    private static readonly byte[] IV = Encoding.UTFUTF8.GetBytes("a_16_byte_iv_for_aes");
+
+    public static string EncryptString(string plainText)
+    {
+        using (Aes aesAlg = Aes.Create())
+        {
+            aesAlg.Key = Key;
+            aesAlg.IV = IV;
+
+            ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
+
+            using (MemoryStream msEncrypt = new MemoryStream())
+            using (CryptoStream csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
+            {
+                using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
+                {
+                    swEncrypt.Write(plainText);
+                }
+                return Convert.ToBase64String(msEncrypt.ToArray());
+            }
+        }
+    }
+}
+
+using System.Security.Cryptography;
+using System.Text;
+using System.IO;
+using System;
+
+public static string DecryptString(string cipherText, byte[] key, byte[] iv)
+{
+    // Проверяем аргументы (пропущено для краткости)
+
+    // Преобразуем зашифрованную строку Base64 обратно в массив байтов
+    byte[] cipherBytes = Convert.FromBase64String(cipherText);
+
+    using (Aes aesAlg = Aes.Create())
+    {
+        aesAlg.Key = key;
+        aesAlg.IV = iv;
+
+        // Создаем дешифратор для выполнения преобразования потока.
+        ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
+
+        // Используем потоки для выполнения дешифрования
+        using (MemoryStream msDecrypt = new MemoryStream(cipherBytes))
+        using (CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
+        {
+            using (StreamReader srDecrypt = new StreamReader(csDecrypt))
+            {
+                // Читаем дешифрованные байты из потока и помещаем их обратно в строку.
+                return srDecrypt.ReadToEnd();
+            }
+        }
+    }
+}
+
+//пример обработки исключения при неверном ключе
+public static string DecryptString(string cipherText, byte[] key, byte[] iv)
+{
+    // ... (код до попытки дешифрования)
+    try
+    {
+        using (CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
+        {
+            using (StreamReader srDecrypt = new StreamReader(csDecrypt))
+            {
+                // Если ключ или IV неверны, исключение возникнет здесь:
+                return srDecrypt.ReadToEnd();
+            }
+        }
+    }
+    catch (CryptographicException ex)
+    {
+        // Обработка ошибки неверного ключа
+        Console.WriteLine($"Ошибка дешифрования: Неверный ключ или IV. {ex.Message}");
+        return null; // Или выбросить собственное исключение
+    }
+    catch (Exception ex)
+    {
+        // Другие возможные ошибки
+        Console.WriteLine($"Произошла ошибка: {ex.Message}");
+        return null;
+    }
+}
+
+

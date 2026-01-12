@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="schemas.microsoft.com"
+               xmlns:x="schemas.microsoft.com"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               x:Class="MyProject.Views.MyCustomPopup">
+
+    <VerticalStackLayout Padding="20" BackgroundColor="White" WidthRequest="300">
+        <Label Text="This is a MAUI Popup!" FontAttributes="Bold" HorizontalOptions="Center" />
+        <Button Text="Close" Clicked="OnCloseButtonClicked" Margin="0, 15, 0, 0" />
+    </VerticalStackLayout>
+    
+</toolkit:Popup>
+
+using CommunityToolkit.Maui.Views;
+
+namespace MyProject.Views;
+
+public partial class MyCustomPopup : Popup
+{
+    public MyCustomPopup()
+    {
+        InitializeComponent();
+    }
+
+    private void OnCloseButtonClicked(object sender, EventArgs e)
+    {
+        CloseAsync(); // Closes the popup
+    }
+}
+
+using CommunityToolkit.Maui.Views;
+using MyProject.Views; // Namespace of your Popup class
+
+private async void OnShowPopupButtonClicked(object sender, EventArgs e)
+{
+    var customPopup = new MyCustomPopup();
+    await this.ShowPopupAsync(customPopup);
+}
+
+
+var result = await this.ShowPopupAsync<string>(new ReturnResultPopup());
+if (result != null)
+{
+    // Handle the result
+}
+
+// Display a simple alert
+await DisplayAlert("Alert Title", "This is the message.", "OK");
+
+// Get user input with a prompt
+string result = await DisplayPromptAsync("Prompt Title", "What is your name?", initialValue: "John Doe");
+
+// Display an action sheet
+string action = await DisplayActionSheet("Title", "Cancel", "Destroy", "Option 1", "Option 2");

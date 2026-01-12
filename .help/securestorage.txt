@@ -1,0 +1,32 @@
+using Microsoft.Maui.Storage;
+
+public async Task SaveDataSecurely(string key, string value)
+{
+    try
+    {
+        await SecureStorage.SetAsync(key, value);
+    }
+    catch (Exception ex)
+    {
+        // Handle exceptions, such as when the key can't be saved
+        Console.WriteLine($"Error saving data: {ex.Message}");
+    }
+}
+
+public async Task<string> ReadDataSecurely(string key)
+{
+    try
+    {
+        string value = await SecureStorage.GetAsync(key);
+        return value;
+    }
+    catch (Exception ex)
+    {
+        // Handle exceptions
+        Console.WriteLine($"Error reading data: {ex.Message}");
+        return null;
+    }
+}
+
+
+sqlite-net-sqlcipher

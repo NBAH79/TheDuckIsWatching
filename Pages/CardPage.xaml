@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<base:SafePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:base="clr-namespace:TheDuckIsWatching.Utils" 
+             x:Class="TheDuckIsWatching.CardPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem  
+            Text="Подсветка" 
+            Clicked="OnColorClicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource 
+                    x:Name="colorButton"
+                    Glyph="&#xf1fc;" 
+                    FontFamily="FontAwesome" 
+                    Color="Black"
+                    Size="20"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem x:Name="helpButton" 
+                     Text="Справка" 
+                     Order="Secondary"
+                     IconImageSource="help_button" 
+                     Clicked="OnHelpClicked" />
+        <ToolbarItem x:Name="deleteButton" 
+                     Text="Удалить" 
+                     Order="Secondary"
+                     IconImageSource="delete_button" 
+                     Clicked="OnDeleteButtonClicked" />
+    </ContentPage.ToolbarItems>
+
+    <Grid RowDefinitions="Auto, 300, Auto">
+
+        <!-- Тайтл -->
+        <Entry x:Name="titleEntry"
+               Grid.Row="0"
+               Placeholder="Наименование"
+               FontFamily="Helvetica"
+               FontSize="18"
+               Margin="25,12"
+               BackgroundColor="White"
+               TextChanged="OnTitleTextChanged"
+               />
+
+        <!-- Текст в рамке со скроллом -->
+        <Border Grid.Row="1"
+                Margin="25,12"
+                Stroke="DarkGray"
+                StrokeThickness="1">
+            <ScrollView VerticalScrollBarVisibility="Default">
+                <Editor x:Name="textEditor"
+                        Placeholder="Текст"
+                        FontFamily="Helvetica"
+                        FontSize="12"
+                        AutoSize="TextChanges"
+                        TextChanged="OnEditorTextChanged" />
+            </ScrollView>
+        </Border>
+
+        <!-- Кнопка -->
+        <Button x:Name="applyButton"
+                Grid.Row="2"
+                Text="Сохранить"
+                Style="{StaticResource Button}"
+                Margin="25,12"
+                HorizontalOptions="Fill"
+                Clicked="OnApplyButtonClicked" />
+
+    </Grid>
+</base:SafePage>
